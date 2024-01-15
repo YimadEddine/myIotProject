@@ -16,18 +16,18 @@ class Dht11(models.Model):
         if self.temp > 30:
             from DHT.views import sendtele,sendwhatsap
             sendtele(self)
-            sendwhatsap()
+            #sendwhatsap()
             # Inline HTML template enclosed in single quotes
             html_message = f'''
                         <html>
                         <head>
-                            <title>🔔Alerte de Temperature</title>
+                            <title>Temperature alert!</title>
                         </head>
                         <body>
                             <h2>température dépasse la normale</h2>
-                            <p>🔥The temperature has exceeded the normal range:</p>
+                            <p>The temperature has exceeded the normal range:</p>
                             <p>Temperature Value: {self.temp}</p>
-                            <p>⏰ Anomaly detected in the machine at: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
+                            <p>Temp must be checked: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
                         </body>
                         </html>
                     '''
@@ -35,8 +35,8 @@ class Dht11(models.Model):
             send_mail(
                 'température dépasse la normale,' + str(self.temp),
                 plain_message,
-                'itsmewadii@gmail.com',
-                ['bouzianewadii2@gmail.com'],
+                'youssef27imad@gmail.com',
+                ['madness.king27@gmail.com'],
                 fail_silently=False,
             )
         return super().save(*args, **kwargs)
